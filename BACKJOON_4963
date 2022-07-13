@@ -1,6 +1,8 @@
 import sys
 sys.setrecursionlimit(10000)
 
+반복적인 재귀호출을 위해 선언
+
 def DFS(x, y):
     if x <= -1 or x >= h or y <= -1 or y >= w:
         return False
