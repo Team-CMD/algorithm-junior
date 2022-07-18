@@ -1,0 +1,29 @@
+from collections import deque
+
+def bfs(x):
+    ans = 0
+    q = deque()
+    q.append(x)
+
+    while q:
+        x = q.popleft()
+        visited[x] = 1
+        for i in v[x]:
+            if visited[i] == 0:
+                q.append(i)
+                visited[i] = 1              
+                ans += 1
+    return ans
+
+T = int(input())
+for _ in range(T):
+    N, M = map(int, input().split())
+    v = [[] for _ in range(N+1)]
+    visited = [0 for _ in range(N+1)]
+
+    for _ in range(M):
+        a, b = map(int, input().split())
+        v[a].append(b)
+        v[b].append(a)
+
+    print(bfs(1))
