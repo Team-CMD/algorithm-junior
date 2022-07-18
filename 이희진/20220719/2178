@@ -1,0 +1,27 @@
+# 2178번 미로 탐색 https://www.acmicpc.net/problem/2178
+
+from collections import deque
+N, M = map(int, input().split())
+maze = [list(map(int, input())) for _ in range(N)]
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+def bfs(x, y):
+    q = deque()
+    q.append([x, y])
+
+    while q:
+        x, y = q.popleft()
+        for i in range(4):
+            Nx = x + dx[i]
+            Ny = y + dy[i]
+
+            if not (Nx < 0 or Ny < 0 or Nx > N-1 or Ny > M-1 or maze[x][y] == 0):
+                if maze[Nx][Ny] == 1:
+                    maze[Nx][Ny] = maze[x][y] + 1
+                    q.append((Nx, Ny))
+
+    return maze[N-1][M-1]
+
+print(bfs(0, 0))
