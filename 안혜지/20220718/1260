@@ -1,0 +1,42 @@
+import sys
+sys.setrecursionlimit(10000)
+from collections import deque
+
+N, M, V = map(int, input().split())
+v = [ [] for i in range(N+1)]
+
+ans_dfs = []
+ans_bfs = []
+
+for _ in range(M):
+    a, b = map(int, input().split())
+    v[a].append(b)
+    v[b].append(a)
+
+for i in v:
+    i.sort()
+
+def dfs(x):
+    ans_dfs.append(x)
+    for i in v[x]:
+        if i not in ans_dfs:
+            dfs(i)
+
+def bfs(x):
+    q = deque()
+    q.append(x)
+    while q:
+        x = q.popleft()
+        ans_bfs.append(x)
+        for i in v[x]:
+            if i not in ans_bfs and i not in q:
+                q.append(i)
+
+dfs(V)
+bfs(V)
+
+for i in ans_dfs:
+    print(i, end=' ')
+print()
+for i in ans_bfs:
+    print(i, end=' ')
