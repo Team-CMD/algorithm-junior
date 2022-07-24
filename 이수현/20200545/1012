@@ -1,1 +1,39 @@
+import sys
+sys.setrecursionlimit(10000)
 
+# dx = [1,1,0,-1,-1,-1,0,1]
+# dy = [0,-1,-1,-1,0,1,1,1]
+
+def DFS(x, y):
+    if x <= -1 or x >= M or y <= -1 or y >= N:
+        return False
+    if arr[x][y] == 1:
+        arr[x][y] = 0
+
+        # for i in range(8):
+        DFS(x + 1, y)
+        DFS(x, y - 1)
+        DFS(x - 1, y)
+        DFS(x, y + 1)
+        return True
+    return False
+
+T = int(input())
+
+for i in range(T):
+    M, N, K = map(int, input().split())
+
+    arr = []
+    for w in range(M):
+        arr.append([0] * N)
+
+    for j in range(K):
+        x, y = map(int, input().split())
+        arr[x][y] = 1
+
+    result = 0
+    for m in range(M):
+        for n in range(N):
+            if DFS(m, n) == True:
+                result += 1
+    print(result)
