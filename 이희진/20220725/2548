@@ -1,0 +1,13 @@
+# 2548번 대표자연수 https://www.acmicpc.net/problem/2548
+
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+a = list(map(int, input().split()))
+
+a.sort()
+if (N % 2) == 0:
+    print(a[N // 2 - 1])
+else:
+    print(a[N // 2])
