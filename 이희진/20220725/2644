@@ -1,0 +1,29 @@
+# 2644번 촌수계산 https://www.acmicpc.net/problem/2644
+
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+n = int(input())
+graph = [[] for _ in range(n + 1)]
+a, b = map(int, input().split())
+R = [0] * (n + 1)
+
+def bfs(N):
+    q = deque()
+    q.append(N)
+    while q:
+        N = q.popleft()
+        for n in graph[N]:
+            if R[n] == 0:
+                R[n] = R[N] + 1
+                q.append(n)
+
+for _ in range(int(input())):
+    x, y = map(int, input().split())
+    graph[x].append(y)
+    graph[y].append(x)
+
+bfs(a)
+
+print(R[b] if R[b] > 0 else -1)
