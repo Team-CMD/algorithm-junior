@@ -1,0 +1,35 @@
+# 9205번 맥주 마시면서 걸어가기 https://www.acmicpc.net/problem/9205
+
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+t = int(input())
+
+def bfs():
+    q = deque()
+    q.append([H[0], H[1]])
+    while q:
+        x, y = q.popleft()
+        if abs(x - F[0]) + abs(y - F[1]) <= 1000:
+            print("happy")
+            return
+        for i in range(n):
+            if not visit[i]:
+                x2, y2 = A[i]
+                if abs(x - x2) + abs(y - y2) <= 1000:
+                    q.append([x2, y2])
+                    visit[i] = 1
+    print("sad")
+    return
+
+for i in range(t):
+    n = int(input())
+    H = [int(x) for x in input().split()]
+    A = []
+    for j in range(n):
+        x, y = map(int, input().split())
+        A.append([x, y])
+    F = [int(x) for x in input().split()]
+    visit = [0 for i in range(n+1)]
+    bfs()
