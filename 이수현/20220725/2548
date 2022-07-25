@@ -1,0 +1,7 @@
+N = int(input())
+num = sorted(list(map(int, input().split())))
+
+if (N % 2) == 0:
+    print(num[N//2-1])
+else:
+    print(num[N//2])
