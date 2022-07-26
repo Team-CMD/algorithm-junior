@@ -1,0 +1,32 @@
+from collections import deque
+
+n = int(input())
+a, b = map(int, input().split())
+m = int(input())
+graph = [[] for _ in range(n+1)]
+level = [0 for _ in range(n+1)]
+
+for _ in range(m):
+   x, y = map(int, input().split())
+   graph[x]. append(y)
+   graph[y].append(x)
+
+
+def bfs(x, y):
+   q = deque()
+   q.append(x)
+   
+   while q:
+      n = q.popleft()
+      if n == y:
+         return
+      for i in graph[n]:
+        if level[i] == 0:
+            q.append(i)
+            level[i] = level[n] + 1
+
+bfs(a, b)
+if level[b] == 0 :
+    print(-1)
+else:
+    print(level[b])
