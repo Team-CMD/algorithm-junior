@@ -1,0 +1,53 @@
+from collections import deque
+
+N, M = map(int,input().split())
+before = []
+after = []
+data = [[0]*M for _ in range(N)]
+
+
+for _ in range(N):
+    before.append(list(map(int, input().split())))
+for _ in range(N):
+    after.append(list(map(int, input().split())))
+
+
+def bfs(x, y):
+    dx = [1, -1, 0, 0]
+    dy = [0, 0, 1, -1]
+
+    q = deque()
+    q.append([x, y])
+    tmp = before[x][y]
+    before[x][y] = after[x][y]
+
+
+    while q:
+        x, y = q.popleft()
+
+        for i in range(4):
+            nx, ny = dx[i] + x, dy[i] + y
+
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+            if before[nx][ny] != tmp:
+                continue
+            if before[nx][ny] == tmp:
+                q.append([nx, ny])
+                before[nx][ny] = before[x][y]
+    return 1
+
+
+ans = 0
+for i in range(N):
+    for j in range(M):
+        if before[i][j] != after[i][j]:
+            ans += bfs(i, j)
+
+
+if ans > 1:
+    print("NO")
+elif before != after:
+    print("NO")
+else:
+    print("YES")
