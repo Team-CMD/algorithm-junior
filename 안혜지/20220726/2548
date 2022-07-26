@@ -1,0 +1,9 @@
+N = int(input())
+data = list(map(int, input().split()))
+data.sort()
+
+
+if N % 2 == 1:
+    print(data[N // 2])
+else:
+    print(data[N // 2 - 1])
