@@ -1,0 +1,25 @@
+K, N = map(int, input().split()) 
+k_len = []
+for _ in range(K):
+   k_len.append(int(input()))
+k_len.sort()
+
+def binary():
+    ans = 0
+    left = 1
+    right = max(k_len)
+    while left <= right:
+            cnt = 0
+            mid = (left + right) // 2
+            for i in k_len:
+               cnt += i // mid
+            if cnt < N:
+               right = mid - 1
+            elif cnt >= N:
+               left = mid + 1
+               if mid >= ans:
+                  ans = mid
+
+    return ans
+
+print(binary())
