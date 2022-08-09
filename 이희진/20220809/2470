@@ -1,0 +1,27 @@
+# 2470번 두 용액 https://www.acmicpc.net/problem/2470
+
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+arr = sorted(list(map(int, input().split())))
+s = 0
+e = N - 1
+a = abs(arr[s]+arr[e])
+b = s
+c = e
+
+while s < e:
+    tmp = arr[s]+arr[e]
+    if abs(tmp) < a:
+        b = s
+        c = e
+        a = abs(tmp)
+        if a == 0:
+            break
+    if tmp > 0:
+        e -= 1
+    else:
+        s += 1
+
+print(arr[b], arr[c])
