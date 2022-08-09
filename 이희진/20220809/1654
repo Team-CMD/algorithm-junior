@@ -1,0 +1,17 @@
+# 1654번 랜선 자르기 https://www.acmicpc.net/problem/1654
+
+K, N = map(int, input().split())
+line = []
+for _ in range(K):
+    line.append(int(input()))
+s = 1
+e = max(line)
+
+while (s <= e):
+    m = (s + e) // 2
+    cnt = sum([x // m for x in line])
+    if cnt >= N:
+        s = m + 1
+    else:
+        e = m - 1
+print(e)
