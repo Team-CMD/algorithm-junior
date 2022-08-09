@@ -1,0 +1,21 @@
+# 1072번 게임 https://www.acmicpc.net/problem/1072
+
+import sys
+input = sys.stdin.readline
+
+X, Y = map(int, input().split())
+Z = (Y * 100) // X
+if Z >= 99:
+    print(-1)
+else:
+    R = 0
+    s = 1
+    e = X
+    while s <= e:
+        m = (s + e) // 2
+        if (Y + m) * 100 // (X + m) <= Z:
+            s = m + 1
+        else:
+            R = m
+            e = m - 1
+    print(R)
