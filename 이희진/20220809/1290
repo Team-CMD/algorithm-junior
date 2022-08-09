@@ -1,0 +1,21 @@
+# 1290번 수 찾기 https://www.acmicpc.net/problem/1920
+
+N = int(input())
+A = list(map(int, input().split()))
+M = int(input())
+B = list(map(int, input().split()))
+A.sort()
+
+def Binary_search(A, t, s, e):
+    if s > e :
+        return 0
+    m = (s + e) // 2
+    if t == A[m] :
+        return 1
+    elif t > A[m] :
+        return Binary_search(A, t, m + 1, e)
+    else :
+        return Binary_search(A, t, s, m - 1)
+
+for t in B :
+    print(Binary_search(A, t, 0, N - 1))
